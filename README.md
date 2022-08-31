@@ -4,7 +4,7 @@ VSCode extension for removing unused imports using [autoflake](https://github.co
 
 ## Features
 
-![Example GIF](https://raw.githubusercontent.com/34j/autoflake-vscode-extension/main/Settings.png)
+![Example GIF](https://raw.githubusercontent.com/34j/autoflake-vscode-extension/main/Example.gif)
 
 ## Requirements
 
