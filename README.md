@@ -4,7 +4,7 @@ VSCode extension for removing unused imports using [autoflake](https://github.co
 
 ## Features
 
-![Example GIF](https://github.com/34j/autoflake-vscode-extension/Example.gif)
+![Example GIF](https://raw.githubusercontent.com/34j/autoflake-vscode-extension/main/Settings.png)
 
 ## Requirements
 
@@ -29,7 +29,7 @@ This extension contributes the following settings: (Most of the available option
 * `autoflake-extension.exclude`: exclude file/directory names that match these comma-separated globs
 * `autoflake-extension.imports`: by default, only unused standard library imports are removed; specify a comma-separated list of additional modules/packages
 
-![Settings](https://github.com/34j/autoflake-vscode-extension/Settings.png)
+![Settings](https://raw.githubusercontent.com/34j/autoflake-vscode-extension/main/Settings.png)
 
 ## Known Issues
 
