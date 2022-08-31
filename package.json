@@ -1,0 +1,139 @@
+{
+  "name": "autoflake-extension",
+  "displayName": "Autoflake Extension",
+  "description": "Remove unused imports using autoflake",
+  "version": "0.0.1",
+  "license": "MIT",
+  "extensionDependencies": [
+    "ms-python.python"
+  ],
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "keywords": [
+    "autoflake", "python", "formatters"
+  ],
+  "author": {
+    "name": "34j"
+  },
+  "publisher": "mikoz",
+  "activationEvents": [
+    "onCommand:autoflake-extension.run"
+  ],
+  "bugs": {
+    "url": "https://github.com/34j/autoflake-vscode-extension/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/34j/autoflake-vscode-extension.git"
+  },
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": [
+      {
+        "title": "Autoflake Extension",
+        "properties": {
+          "autoflake-extension.expand-star-imports": {
+            "type": "boolean",
+            "default": false,
+            "scope": "resource",
+            "description": "expand wildcard star imports with undefined names; this only triggers if there is only one star import in the file; this is skipped if there are any uses of `__all__` or `del` in the file"
+          },
+          "autoflake-extension.remove-all-unused-imports": {
+            "type": "boolean",
+            "default": true,
+            "scope": "resource",
+            "description": "remove all unused imports (not just those from the standard library)"
+          },
+          "autoflake-extension.ignore-init-module-imports": {
+            "type": "boolean",
+            "default": false,
+            "scope": "resource",
+            "description": "exclude __init__.py when removing unused imports"
+          },
+          "autoflake-extension.remove-duplicate-keys": {
+            "type": "boolean",
+            "default": false,
+            "scope": "resource",
+            "description": "remove all duplicate keys in objects"
+          },
+          "autoflake-extension.remove-unused-variables": {
+            "type": "boolean",
+            "default": false,
+            "scope": "resource",
+            "description": "remove unused variables"
+          },
+          "autoflake-extension.remove-rhs-for-unused-variables": {
+            "type": "boolean",
+            "default": false,
+            "scope": "resource",
+            "description": "remove RHS of statements when removing unused variables (unsafe)"
+          },
+          "autoflake-extension.check": {
+            "type": "boolean",
+            "default": false,
+            "scope": "resource",
+            "description": "return error code if changes are needed"
+          },
+          "autoflake-extension.jobs": {
+            "type": "number",
+            "default": 0,
+            "scope": "resource",
+            "description": "number of parallel jobs; match CPU count if value is 0 (default: 0)"
+          },
+          "autoflake-extension.exclude": {
+            "type": "string",
+            "default": null,
+            "scope": "resource",
+            "description": "exclude file/directory names that match these comma-separated globs"
+          },
+          "autoflake-extension.imports": {
+            "type": "string",
+            "default": null,
+            "scope": "resource",
+            "description": "by default, only unused standard library imports are removed; specify a comma-separated list of additional modules/packages"
+          }
+        }
+      }
+    ],
+    "commands": [
+      {
+        "command": "autoflake-extension.run",
+        "title": "Python: Run autoflake For The Current File"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "resourceLangId == python || explorerResourceIsFolder",
+          "command": "autoflake-extension.run",
+          "group": "2_workspace@-1"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.70.0",
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.0.0",
+    "typescript": "^4.7.4",
+    "@vscode/test-electron": "^2.1.5"
+  }
+}
