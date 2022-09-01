@@ -31,8 +31,8 @@ This extension contributes the following settings: (Most of the available option
 - `autoflake-extension.remove-rhs-for-unused-variables`: remove RHS of statements when removing unused variables (unsafe)
 - `autoflake-extension.check`: return error code if changes are needed
 - `autoflake-extension.jobs`: number of parallel jobs; match CPU count if value is 0 (default: 0)
-- `autoflake-extension.exclude`: exclude file/directory names that match these comma-separated globs
-- `autoflake-extension.imports`: by default, only unused standard library imports are removed; specify a comma-separated list of additional modules/packages
+- `autoflake-extension.exclude`: exclude file/directory names that match these globs
+- `autoflake-extension.imports`: by default, only unused standard library imports are removed; specify a list of additional modules/packages
 
 ![Settings](https://raw.githubusercontent.com/34j/autoflake-vscode-extension/main/images/Settings.png)
 
