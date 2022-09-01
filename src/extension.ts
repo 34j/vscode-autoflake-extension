@@ -48,6 +48,21 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	context.subscriptions.push(disposable);
+
+	// For running autoflake for workspace folders
+	disposable = vscode.commands.registerCommand(
+		'autoflake-extension.runForWorkspaceFolders',
+		async () => {
+			const workspaceFolders = vscode.workspace.workspaceFolders;
+			if (workspaceFolders === undefined){
+				vscode.window.showErrorMessage('No workspace has been opened.');
+				return;
+			}
+			await vscode.commands.executeCommand('autoflake-extension.run', undefined, workspaceFolders.map(folder => folder.uri));
+		}
+	);
+
+	context.subscriptions.push(disposable);
 }
 
 // this method is called when your extension is deactivated

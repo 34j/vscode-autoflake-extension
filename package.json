@@ -14,14 +14,17 @@
     "Formatters"
   ],
   "keywords": [
-    "autoflake", "python", "formatters"
+    "autoflake",
+    "python",
+    "formatters"
   ],
   "author": {
     "name": "34j"
   },
   "publisher": "mikoz",
   "activationEvents": [
-    "onCommand:autoflake-extension.run"
+    "onCommand:autoflake-extension.run",
+    "onCommand:autoflake-extension.runForWorkspaceFolders"
   ],
   "bugs": {
     "url": "https://github.com/34j/autoflake-vscode-extension/issues"
@@ -86,7 +89,15 @@
           },
           "autoflake-extension.exclude": {
             "type": "array",
-            "default": ["venv", "env", ".venv", ".env", "ENV", "env.bak", "venv.bak"],
+            "default": [
+              "venv",
+              "env",
+              ".venv",
+              ".env",
+              "ENV",
+              "env.bak",
+              "venv.bak"
+            ],
             "scope": "resource",
             "description": "exclude file/directory names that match these globs"
           },
@@ -104,6 +115,10 @@
         "command": "autoflake-extension.run",
         "title": "Python: Run autoflake",
         "enablement": "resourceLangId == python || explorerResourceIsFolder"
+      },
+      {
+        "command": "autoflake-extension.runForWorkspaceFolders",
+        "title": "Python: Run autoflake For The Workspace Folders"
       }
     ],
     "menus": {

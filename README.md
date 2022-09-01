@@ -7,7 +7,8 @@ VSCode extension for removing unused imports using [autoflake](https://github.co
 
 ## Features
 
-- Running autoflake for specific files / folders (single or multiple)
+- Running autoflake for specific file**(s)** and folder**(s)** 
+- Running autoflake for workspace
 
 ![Example GIF](https://raw.githubusercontent.com/34j/autoflake-vscode-extension/main/images/Example.gif)
 
