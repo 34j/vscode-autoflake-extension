@@ -3,3 +3,6 @@ dist
 node_modules
 .vscode-test/
 *.vsix
+*.clip
+*.stg
+Icon.png

@@ -2,8 +2,9 @@
   "name": "autoflake-extension",
   "displayName": "Autoflake Extension",
   "description": "Remove unused imports using autoflake",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
+  "icon": "images/Icon.png",
   "extensionDependencies": [
     "ms-python.python"
   ],
