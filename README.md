@@ -6,6 +6,8 @@
 
 VSCode extension for removing unused imports using [autoflake](https://github.com/PyCQA/autoflake) from the GUI.
 
+[![Install Now](https://img.shields.io/badge/-Install%20Now-107C10?style=for-the-badge&logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=mikoz.autoflake-extension)
+
 ## Features
 
 - Running autoflake for specific file(s) and folder(s)
