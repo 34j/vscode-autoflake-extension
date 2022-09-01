@@ -2,7 +2,7 @@
   "name": "autoflake-extension",
   "displayName": "Autoflake Extension",
   "description": "Remove unused imports using autoflake",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "extensionDependencies": [
     "ms-python.python"
@@ -102,7 +102,8 @@
     "commands": [
       {
         "command": "autoflake-extension.run",
-        "title": "Python: Run autoflake For The Current File"
+        "title": "Python: Run autoflake",
+        "enablement": "resourceLangId == python || explorerResourceIsFolder"
       }
     ],
     "menus": {

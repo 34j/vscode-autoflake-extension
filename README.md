@@ -1,8 +1,13 @@
-# autoflake-vscode-extension README
+# autoflake-vscode-extension
+
+[![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/mikoz.autoflake-extension)](https://marketplace.visualstudio.com/items?itemName=mikoz.autoflake-extension)
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/mikoz.autoflake-extension)](https://marketplace.visualstudio.com/items?itemName=mikoz.autoflake-extension)
 
 VSCode extension for removing unused imports using [autoflake](https://github.com/PyCQA/autoflake) from the GUI.
 
 ## Features
+
+- Running autoflake for specific files / folders (single or multiple)
 
 ![Example GIF](https://raw.githubusercontent.com/34j/autoflake-vscode-extension/main/Example.gif)
 
@@ -18,16 +23,16 @@ pip install -U autoflake
 
 This extension contributes the following settings: (Most of the available options in autoflake.)
 
-* `autoflake-extension.expand-star-imports`: expand wildcard star imports with undefined names; this only triggers if there is only one star import in the file; this is skipped if there are any uses of `__all__` or `del` in the file
-* `autoflake-extension.remove-all-unused-imports`: remove all unused imports (not just those from the standard library)
-* `autoflake-extension.ignore-init-module-imports`: exclude __init__.py when removing unused imports
-* `autoflake-extension.remove-duplicate-keys`: remove all duplicate keys in objects
-* `autoflake-extension.remove-unused-variables`: remove unused variables
-* `autoflake-extension.remove-rhs-for-unused-variables`: remove RHS of statements when removing unused variables (unsafe)
-* `autoflake-extension.check`: return error code if changes are needed
-* `autoflake-extension.jobs`: number of parallel jobs; match CPU count if value is 0 (default: 0)
-* `autoflake-extension.exclude`: exclude file/directory names that match these comma-separated globs
-* `autoflake-extension.imports`: by default, only unused standard library imports are removed; specify a comma-separated list of additional modules/packages
+- `autoflake-extension.expand-star-imports`: expand wildcard star imports with undefined names; this only triggers if there is only one star import in the file; this is skipped if there are any uses of `__all__` or `del` in the file
+- `autoflake-extension.remove-all-unused-imports`: remove all unused imports (not just those from the standard library)
+- `autoflake-extension.ignore-init-module-imports`: exclude __init__.py when removing unused imports
+- `autoflake-extension.remove-duplicate-keys`: remove all duplicate keys in objects
+- `autoflake-extension.remove-unused-variables`: remove unused variables
+- `autoflake-extension.remove-rhs-for-unused-variables`: remove RHS of statements when removing unused variables (unsafe)
+- `autoflake-extension.check`: return error code if changes are needed
+- `autoflake-extension.jobs`: number of parallel jobs; match CPU count if value is 0 (default: 0)
+- `autoflake-extension.exclude`: exclude file/directory names that match these comma-separated globs
+- `autoflake-extension.imports`: by default, only unused standard library imports are removed; specify a comma-separated list of additional modules/packages
 
 ![Settings](https://raw.githubusercontent.com/34j/autoflake-vscode-extension/main/Settings.png)
 
