@@ -79,22 +79,22 @@
             "description": "return error code if changes are needed"
           },
           "autoflake-extension.jobs": {
-            "type": "number",
+            "type": "integer",
             "default": 0,
             "scope": "resource",
             "description": "number of parallel jobs; match CPU count if value is 0 (default: 0)"
           },
           "autoflake-extension.exclude": {
-            "type": "string",
-            "default": null,
+            "type": "array",
+            "default": ["venv", "env", ".venv", ".env", "ENV", "env.bak", "venv.bak"],
             "scope": "resource",
-            "description": "exclude file/directory names that match these comma-separated globs"
+            "description": "exclude file/directory names that match these globs"
           },
           "autoflake-extension.imports": {
-            "type": "string",
-            "default": null,
+            "type": "array",
+            "default": [],
             "scope": "resource",
-            "description": "by default, only unused standard library imports are removed; specify a comma-separated list of additional modules/packages"
+            "description": "by default, only unused standard library imports are removed; specify a list of additional modules/packages"
           }
         }
       }

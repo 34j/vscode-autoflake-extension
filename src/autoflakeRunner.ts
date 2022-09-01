@@ -13,16 +13,6 @@ export class AutoflakeRunner {
         this.terminalProvider = teminalProvider;
     }
 
-
-    /**
-     * Whether the string is null or whitespace only.
-     * @param str Input string.
-     * @returns Whether the string is null or whitespace only.
-     */
-    private isNullOrWhitespace(str: string | undefined): boolean {
-        return !str || !str.trim();
-    }
-
     /**
      * Get the interpreter path for python.
      * @returns The interpreter path.
@@ -57,24 +47,41 @@ export class AutoflakeRunner {
         ];
         let options: string[] = [pythonInterpreterPath, '-m', 'autoflake', '--recursive', '--in-place'];
         for (const flag of flags) {
-            if (config.get(flag) === true) {
+            if (config.get<boolean>(flag)) {
                 options.push('--' + flag);
             }
         }
 
         // numbers
-        if (config.get('jobs') !== 0) {
+        const jobs = config.get<number>('jobs');
+        if (jobs && Number.isInteger(jobs) && jobs > 0) {
             options.push('--jobs=' + config.get('jobs'));
         }
+        else if (jobs === 0){
 
-        // strings
-        if (!this.isNullOrWhitespace(config.get('exclude'))) {
-            options.push('--exclude=' + config.get('exclude'));
         }
-        if (!this.isNullOrWhitespace(config.get('imports'))) {
-            options.push('--imports=' + config.get('imports'));
+        else{
+            vscode.window.showWarningMessage('autoflake-extension.jobs must be non-negative integer. Skipping this option.');
         }
 
+        // string arrays
+        const excludes = config.get<[]>('exclude');
+        if (!excludes || !excludes.every(x => typeof x === 'string')){
+            vscode.window.showWarningMessage('autoflake-extension.excludes contains non-string elements. Skipping this option.');
+        }
+        else if (excludes.length > 0) {
+            options.push('--exclude="' + excludes.join(',') + '"');
+        }
+
+        const imports = config.get<string[]>('imports');
+        if (!imports || !imports.every(x => typeof x === 'string')){
+            vscode.window.showWarningMessage('autoflake-extension.imports contains non-string elements. Skipping this option.');
+        }
+        else if (imports.length > 0) {
+            options.push('--imports="' + imports.join(',') + '"');
+        }
+
+        // To support bash, enclose file paths in quotes.
         options = options.concat(uris.map(uri => `"${uri.fsPath}"`));
         return options.join(' ');
     }
