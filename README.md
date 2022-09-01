@@ -1,14 +1,15 @@
 # autoflake-vscode-extension
 
-[![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/mikoz.autoflake-extension)](https://marketplace.visualstudio.com/items?itemName=mikoz.autoflake-extension)
+[![GitHub](https://img.shields.io/github/license/34j/autoflake-vscode-extension?logo=github&logoColor=%23181717)](https://github.com/34j/autoflake-vscode-extension)
+[![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/mikoz.autoflake-extension?logo=visual-studio-code&logoColor=%23007ACC)](https://marketplace.visualstudio.com/items?itemName=mikoz.autoflake-extension)
 [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/mikoz.autoflake-extension)](https://marketplace.visualstudio.com/items?itemName=mikoz.autoflake-extension)
 
 VSCode extension for removing unused imports using [autoflake](https://github.com/PyCQA/autoflake) from the GUI.
 
 ## Features
 
-- Running autoflake for specific file**(s)** and folder**(s)** 
-- Running autoflake for workspace
+- Running autoflake for specific file(s) and folder(s)
+- Running autoflake for the workspace
 
 ![Example GIF](https://raw.githubusercontent.com/34j/autoflake-vscode-extension/main/images/Example.gif)
 
@@ -19,6 +20,8 @@ autoflake>=1.5.2
 ```shell
 pip install -U autoflake
 ```
+
+It may work with lower versions, but some of the options will not work.
 
 ## Extension Settings
 
