@@ -28,11 +28,11 @@
     "onCommand:autoflake-extension.runForWorkspaceFolders"
   ],
   "bugs": {
-    "url": "https://github.com/34j/autoflake-vscode-extension/issues"
+    "url": "https://github.com/34j/vscode-autoflake-extension/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/34j/autoflake-vscode-extension.git"
+    "url": "https://github.com/34j/vscode-autoflake-extension.git"
   },
   "main": "./out/extension.js",
   "contributes": {

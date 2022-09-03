@@ -1,6 +1,6 @@
-# autoflake-vscode-extension
+# vscode-autoflake-extension
 
-[![GitHub](https://img.shields.io/github/license/34j/autoflake-vscode-extension?logo=github&logoColor=%23181717)](https://github.com/34j/autoflake-vscode-extension)
+[![GitHub](https://img.shields.io/github/license/34j/vscode-autoflake-extension?logo=github&logoColor=%23181717)](https://github.com/34j/vscode-autoflake-extension)
 [![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/mikoz.autoflake-extension?logo=visual-studio-code&logoColor=%23007ACC)](https://marketplace.visualstudio.com/items?itemName=mikoz.autoflake-extension)
 [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/mikoz.autoflake-extension)](https://marketplace.visualstudio.com/items?itemName=mikoz.autoflake-extension)
 
@@ -13,7 +13,7 @@ VSCode extension for removing unused imports using [autoflake](https://github.co
 - Running autoflake for specific file(s) and folder(s)
 - Running autoflake for the workspace
 
-![Example GIF](https://raw.githubusercontent.com/34j/autoflake-vscode-extension/main/images/Example.gif)
+![Example GIF](https://raw.githubusercontent.com/34j/vscode-autoflake-extension/main/images/Example.gif)
 
 ## Requirements
 
@@ -40,7 +40,7 @@ This extension contributes the following settings: (Most of the available option
 - `autoflake-extension.exclude`: exclude file/directory names that match these globs
 - `autoflake-extension.imports`: by default, only unused standard library imports are removed; specify a list of additional modules/packages
 
-![Settings](https://raw.githubusercontent.com/34j/autoflake-vscode-extension/main/images/Settings.png)
+![Settings](https://raw.githubusercontent.com/34j/vscode-autoflake-extension/main/images/Settings.png)
 
 ## Known Issues
 
