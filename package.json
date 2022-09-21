@@ -100,7 +100,7 @@
               "venv.bak"
             ],
             "items": {
-              "type": "string",
+              "type": "string"
             },
             "scope": "resource",
             "description": "exclude file/directory names that match these globs"
@@ -109,7 +109,7 @@
             "type": "array",
             "default": [],
             "items": {
-              "type": "string",
+              "type": "string"
             },
             "scope": "resource",
             "description": "by default, only unused standard library imports are removed; specify a list of additional modules/packages"
