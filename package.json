@@ -99,12 +99,18 @@
               "env.bak",
               "venv.bak"
             ],
+            "items": {
+              "type": "string",
+            },
             "scope": "resource",
             "description": "exclude file/directory names that match these globs"
           },
           "autoflake-extension.imports": {
             "type": "array",
             "default": [],
+            "items": {
+              "type": "string",
+            },
             "scope": "resource",
             "description": "by default, only unused standard library imports are removed; specify a list of additional modules/packages"
           }
