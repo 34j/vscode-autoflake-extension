@@ -6,3 +6,4 @@ node_modules
 *.clip
 *.stg
 Icon.png
+.idea/

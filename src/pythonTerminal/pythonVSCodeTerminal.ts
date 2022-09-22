@@ -1,15 +1,32 @@
 import * as vscode from 'vscode';
+import assert = require('assert');
+import { IPythonTerminal } from './types';
+
 /**
- * Provides a properly configured terminal for executing Python commands.
+ * Provides a properly configured vscode terminal for executing Python commands.
  */
-export class PythonTerminalProvider {
+
+export class PythonVSCodeTerminal implements IPythonTerminal {
     private terminal: vscode.Terminal | undefined;
+    private execCommand: string[] = [];
+
+    /**
+     * Get the interpreter path for python.
+     * @returns The interpreter path.
+     */
+    private getPythonInterpreterPath(): string {
+        const interpreterPath = vscode.workspace.getConfiguration('python').get<string>('defaultInterpreterPath');
+        if (interpreterPath === undefined) {
+            throw new ReferenceError('No python interpreter configured');
+        }
+        return interpreterPath;
+    }
 
     /**
      * Get a properly configured terminal for executing Python commands.
      * @returns The configured terminal.
      */
-    public async getTerminal() {
+    private async init() {
         // For terminal api, See: https://github.com/Tyriar/vscode-terminal-api-example/blob/master/src/extension.ts
         // Open terminal if not already opened or not active
         // exitStatus === undefined if terminal is still alive.
@@ -24,6 +41,15 @@ export class PythonTerminalProvider {
                 // But it should be installed because we have set "extensionDependencies" in package.json.
             }
         }
-        return this.terminal;
+    }
+
+    public async send(options: string[], addNewLine?: boolean) {
+        if (this.terminal === undefined) {
+            await this.init();
+            this.execCommand = this.getPythonInterpreterPath().split(' ');
+        }
+        assert(this.terminal !== undefined);
+        options = this.execCommand.concat(options);
+        this.terminal.sendText(options.join(" "), addNewLine);
     }
 }

@@ -1,28 +1,16 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { PythonTerminalProvider } from './terminalProvider';
+import { IPythonTerminal } from './pythonTerminal/types';
 
 /**
  * Runs autoflake.
  */
 export class AutoflakeRunner {
-    private terminalProvider: PythonTerminalProvider;
+    private terminal: IPythonTerminal;
 
-    constructor(teminalProvider: PythonTerminalProvider) {
-        this.terminalProvider = teminalProvider;
-    }
-
-    /**
-     * Get the interpreter path for python.
-     * @returns The interpreter path.
-     */
-    private getPythonInterpreterPath(): string {
-        const interpreterPath = vscode.workspace.getConfiguration('python').get<string>('defaultInterpreterPath');
-        if (interpreterPath === undefined) {
-            throw new ReferenceError('No python interpreter configured');
-        }
-        return interpreterPath;
+    constructor(terminal: IPythonTerminal) {
+        this.terminal = terminal;
     }
 
     /**
@@ -31,7 +19,7 @@ export class AutoflakeRunner {
      * @param uris File paths and folder paths to run autoflake.
      * @returns command text
      */
-    private getCommandText(pythonInterpreterPath: string, uris: vscode.Uri[]): string {
+    private getOptions(uris: vscode.Uri[]): string[] {
         // Create command text
         // For list of autoflake options, See: https://github.com/PyCQA/autoflake#advanced-usage
         const config = vscode.workspace.getConfiguration('autoflake-extension');
@@ -45,7 +33,7 @@ export class AutoflakeRunner {
             'remove-unused-variables',
             'remove-rhs-for-unused-variables',
         ];
-        let options: string[] = [pythonInterpreterPath, '-m', 'autoflake', '--recursive', '--in-place'];
+        let options: string[] = ['-m', 'autoflake', '--recursive', '--in-place'];
         for (const flag of flags) {
             if (config.get<boolean>(flag)) {
                 options.push('--' + flag);
@@ -83,7 +71,7 @@ export class AutoflakeRunner {
 
         // To support bash, enclose file paths in quotes.
         options = options.concat(uris.map(uri => `"${uri.fsPath}"`));
-        return options.join(' ');
+        return options;
     }
 
     //https://github.com/microsoft/vscode-python/blob/3698950c97982f31bb9dbfc19c4cd8308acda284/src/client/common/process/proc.ts
@@ -96,11 +84,8 @@ export class AutoflakeRunner {
         vscode.window.withProgress(
             { location: vscode.ProgressLocation.Notification, title: "Running autoflake" },
             async progress => {
-                // Get python.defaultInterpreterPath
-                const pythonInterpreterPath = this.getPythonInterpreterPath();
-                const terminal = await this.terminalProvider.getTerminal();
-                const commandText = this.getCommandText(pythonInterpreterPath, uris);
-                terminal.sendText(commandText);
+                const command = this.getOptions(uris);
+                this.terminal.send(command);
             });
     }
 }
