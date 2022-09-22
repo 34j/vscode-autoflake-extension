@@ -28,7 +28,7 @@ export function activate(context: vscode.ExtensionContext) {
 				if (uri === undefined) {
 					const activeTextEditor = vscode.window.activeTextEditor;
 					if (activeTextEditor === undefined) {
-						vscode.window.showErrorMessage('No file to process');
+						vscode.window.showErrorMessage('No file to process.');
 						return;
 					} else {
 						uri = activeTextEditor.document.uri;
