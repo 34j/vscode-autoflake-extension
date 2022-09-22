@@ -3,11 +3,20 @@
 import * as vscode from 'vscode';
 import { PythonHiddenTerminal } from "./pythonTerminal/pythonHiddenTerminal";
 import { AutoflakeRunner } from './autoflakeRunner';
+import { PythonVSCodeTerminal } from './pythonTerminal/pythonVSCodeTerminal';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	const autoflakeRunner = new AutoflakeRunner(new PythonHiddenTerminal(undefined));
+	let useIntegrated = vscode.workspace.getConfiguration('autoflake-extension.extension').get<boolean>('useIntegratedTerminal');
+	let autoflakeRunner = new AutoflakeRunner(useIntegrated ? new PythonVSCodeTerminal() : new PythonHiddenTerminal(undefined));
+	vscode.workspace.onDidChangeConfiguration((e) => {
+		if (e.affectsConfiguration('autoflake-extension.extension')) {
+			useIntegrated =  vscode.workspace.getConfiguration('autoflake-extension.extension').get('useIntegratedTerminal');
+			autoflakeRunner = new AutoflakeRunner(useIntegrated ? new PythonVSCodeTerminal() : new PythonHiddenTerminal(undefined));
+			console.log('autoflake-extension: useIntegratedTerminal changed to ' + useIntegrated);
+		}
+	});
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "autoflake-extension" is now active!');
