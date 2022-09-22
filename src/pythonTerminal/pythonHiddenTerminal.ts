@@ -23,11 +23,11 @@ export class PythonHiddenTerminal implements IPythonTerminal {
                 this.execCommand = execCommand;
             }
             else {
-                throw new Error("Python interpreter is not configured");
+                throw new Error("Python interpreter is not configured.");
             }
         }
         else {
-            throw new Error("Could not get python extension api");
+            throw new Error("Could not get python extension api.");
         }
     }
 
@@ -36,18 +36,23 @@ export class PythonHiddenTerminal implements IPythonTerminal {
             await this.init();
             this.isInitialized = true;
         }
-        options = this.execCommand.concat(options);
-        console.log(options.join(" "));
-        const child = child_process.spawn(options[0], options.slice(1), { shell: true });
-        child.stdout.on('data', (data) => {
-            console.log(`stdout: ${data}`);
-        });
-        child.stderr.on('data', (data) => {
-            console.error(`stderr: ${data}`);
-            throw new Error(`stderr: ${data}`);
-        });
-        child.on('close', (code) => {
-            console.log(`child process exited with code ${code}`);
+        const command = this.execCommand.concat(options);
+
+        //Create child_process      
+        console.log("Running command: " + command.join(" "));
+        await new Promise((resolve, reject) => {
+            const child = child_process.spawn(command[0], command.slice(1), { shell: true });
+            child.stdout.on('data', (data) => {
+                console.log(`Stdout: ${data}`);
+            });
+            child.stderr.on('data', (data) => {
+                console.error(`Stderr: ${data}`);
+                reject(`Stderr: ${data}`);
+            });
+            child.on('close', (code) => {
+                console.log(`Child process exited with code ${code}.`);
+                resolve('Done');
+            });
         });
     }
 }

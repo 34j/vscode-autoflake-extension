@@ -45,16 +45,16 @@ export class AutoflakeRunner {
         if (jobs && Number.isInteger(jobs) && jobs > 0) {
             options.push('--jobs=' + config.get('jobs'));
         }
-        else if (jobs === 0){
+        else if (jobs === 0) {
 
         }
-        else{
+        else {
             vscode.window.showWarningMessage('autoflake-extension.jobs must be non-negative integer. Skipping this option.');
         }
 
         // string arrays
         const excludes = config.get<[]>('exclude');
-        if (!excludes || !excludes.every(x => typeof x === 'string')){
+        if (!excludes || !excludes.every(x => typeof x === 'string')) {
             vscode.window.showWarningMessage('autoflake-extension.excludes contains non-string elements. Skipping this option.');
         }
         else if (excludes.length > 0) {
@@ -62,7 +62,7 @@ export class AutoflakeRunner {
         }
 
         const imports = config.get<string[]>('imports');
-        if (!imports || !imports.every(x => typeof x === 'string')){
+        if (!imports || !imports.every(x => typeof x === 'string')) {
             vscode.window.showWarningMessage('autoflake-extension.imports contains non-string elements. Skipping this option.');
         }
         else if (imports.length > 0) {
@@ -84,8 +84,12 @@ export class AutoflakeRunner {
         vscode.window.withProgress(
             { location: vscode.ProgressLocation.Notification, title: "Running autoflake" },
             async progress => {
-                const command = this.getOptions(uris);
-                this.terminal.send(command);
+                try {
+                    const command = this.getOptions(uris);
+                    await this.terminal.send(command);
+                } catch (e) {
+                    vscode.window.showErrorMessage("Failed to run autoflake. " + e);
+                }
             });
     }
 }

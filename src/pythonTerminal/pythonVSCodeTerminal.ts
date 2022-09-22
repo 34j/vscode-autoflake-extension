@@ -49,7 +49,8 @@ export class PythonVSCodeTerminal implements IPythonTerminal {
             this.execCommand = this.getPythonInterpreterPath().split(' ');
         }
         assert(this.terminal !== undefined);
-        options = this.execCommand.concat(options);
-        this.terminal.sendText(options.join(" "), addNewLine);
+
+        const command = this.execCommand.concat(options);
+        this.terminal.sendText(command.join(" "), addNewLine);
     }
 }

@@ -18,13 +18,13 @@ export function activate(context: vscode.ExtensionContext) {
 		'autoflake-extension.run',
 		async (uri: vscode.Uri, uris: vscode.Uri[]) => {
 			// The code you place here will be executed every time your command is executed
-			
+
 			// if the command is called from Command Palette, uri and uris are undefined
 			// we use the current file
 
 			// To support calling the command from other scripts, we check both uris and uri.
 			// Uris take precedence over uri.
-			if (uris === undefined) {			
+			if (uris === undefined) {
 				if (uri === undefined) {
 					const activeTextEditor = vscode.window.activeTextEditor;
 					if (activeTextEditor === undefined) {
@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
 					} else {
 						uri = activeTextEditor.document.uri;
 					}
-				}	
+				}
 				uris = [uri];
 			}
 
@@ -54,7 +54,7 @@ export function activate(context: vscode.ExtensionContext) {
 		'autoflake-extension.runForWorkspaceFolders',
 		async () => {
 			const workspaceFolders = vscode.workspace.workspaceFolders;
-			if (workspaceFolders === undefined){
+			if (workspaceFolders === undefined) {
 				vscode.window.showErrorMessage('No workspace has been opened.');
 				return;
 			}
