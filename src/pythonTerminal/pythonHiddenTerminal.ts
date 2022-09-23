@@ -32,6 +32,10 @@ export class PythonHiddenTerminal implements IPythonTerminal {
     }
 
     public async send(options: string[], addNewLine?: boolean) {
+        if (addNewLine) {
+            throw new Error("addNewLine is not supported for hidden terminal.");
+        }
+        
         if (!this.isInitialized) {
             await this.init();
             this.isInitialized = true;
@@ -40,19 +44,23 @@ export class PythonHiddenTerminal implements IPythonTerminal {
 
         //Create child_process      
         console.log("Running command: " + command.join(" "));
-        await new Promise((resolve, reject) => {
-            const child = child_process.spawn(command[0], command.slice(1), { shell: true });
-            child.stdout.on('data', (data) => {
-                console.log(`Stdout: ${data}`);
+        try {
+            await new Promise((resolve, reject) => {
+                const child = child_process.spawn(command[0], command.slice(1), { shell: true });
+                child.stdout.on('data', (data) => {
+                    console.log(`Stdout: ${data}`);
+                });
+                child.stderr.on('data', (data) => {
+                    console.error(`Stderr: ${data}`);
+                    reject(`Stderr: ${data}`);
+                });
+                child.on('close', (code) => {
+                    console.log(`Child process exited with code ${code}.`);
+                    resolve('Done');
+                });
             });
-            child.stderr.on('data', (data) => {
-                console.error(`Stderr: ${data}`);
-                reject(`Stderr: ${data}`);
-            });
-            child.on('close', (code) => {
-                console.log(`Child process exited with code ${code}.`);
-                resolve('Done');
-            });
-        });
+        } catch (e) {
+            throw new Error('' + e);
+        }
     }
 }
