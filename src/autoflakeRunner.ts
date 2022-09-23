@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { PythonVSCodeTerminal } from './pythonTerminal/pythonVSCodeTerminal';
 import { IPythonTerminal } from './pythonTerminal/types';
 
 /**
@@ -88,7 +89,15 @@ export class AutoflakeRunner {
                     const command = this.getOptions(uris);
                     await this.terminal.send(command);
                 } catch (e) {
-                    vscode.window.showErrorMessage("Failed to run autoflake. " + e);
+                    if (e instanceof Error && e.message.includes('No module named')) {
+                        vscode.window.showWarningMessage('autoflake is not installed. Install?', 'Yes', 'No').then(async selection => {
+                            if (selection === 'Yes') {
+                                await new PythonVSCodeTerminal().send(['-m', 'pip', 'install', '-U', 'autoflake']);
+                            }
+                        });
+                    } else {
+                        vscode.window.showErrorMessage("Failed to run autoflake. " + e);
+                    }
                 }
             });
     }
