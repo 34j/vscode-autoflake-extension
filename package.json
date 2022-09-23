@@ -17,7 +17,9 @@
   "keywords": [
     "autoflake",
     "python",
-    "formatters"
+    "formatters",
+    "isort",
+    "pyflakes"
   ],
   "author": {
     "name": "34j"
