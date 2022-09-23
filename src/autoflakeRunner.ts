@@ -83,7 +83,7 @@ export class AutoflakeRunner {
      */
     public async runAutoflake(uris: vscode.Uri[]) {
         vscode.window.withProgress(
-            { location: vscode.ProgressLocation.Notification, title: "Running autoflake" },
+            { location: vscode.ProgressLocation.Window, title: "Running autoflake" },
             async progress => {
                 try {
                     const command = this.getOptions(uris);
