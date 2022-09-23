@@ -17,7 +17,7 @@ VSCode extension for removing unused imports using [autoflake](https://github.co
 
 ## Requirements
 
-autoflake>=1.5.2
+`autoflake>=1.5.2`
 
 ```shell
 pip install -U autoflake
@@ -39,9 +39,10 @@ This extension contributes the following settings: (Most of the available option
 - `autoflake-extension.jobs`: number of parallel jobs; match CPU count if value is 0 (default: 0)
 - `autoflake-extension.exclude`: exclude file/directory names that match these globs
 - `autoflake-extension.imports`: by default, only unused standard library imports are removed; specify a list of additional modules/packages
+- `autoflake-extension.extension.useIntegratedTerminal`: Whether to use integrated terminal instead of hidden terminal. (Not recommended)
 
 ![Settings](https://raw.githubusercontent.com/34j/vscode-autoflake-extension/main/images/Settings.png)
 
 ## Known Issues
 
-If you are using venv and intentionally somewhat deactivate venv after this extension opened a teminal, it will not work unless you close the terminal.
+If you are setting `autoflake-extension.extension.useIntegratedTerminal` to `true` and using venv and intentionally somewhat deactivate venv after this extension opened a teminal, it will not work unless you close the terminal.
