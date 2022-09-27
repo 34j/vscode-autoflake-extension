@@ -72,6 +72,16 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	context.subscriptions.push(disposable);
+
+	// Register as a formatter
+	disposable = vscode.languages.registerDocumentFormattingEditProvider({language: 'python'}, {
+		async provideDocumentFormattingEdits(document: vscode.TextDocument): Promise<vscode.TextEdit[]> {
+			await vscode.commands.executeCommand('autoflake-extension.run', document.uri, undefined);
+			return [];
+		}
+	});
+
+	context.subscriptions.push(disposable);
 }
 
 // this method is called when your extension is deactivated

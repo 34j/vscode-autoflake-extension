@@ -27,7 +27,8 @@
   "publisher": "mikoz",
   "activationEvents": [
     "onCommand:autoflake-extension.run",
-    "onCommand:autoflake-extension.runForWorkspaceFolders"
+    "onCommand:autoflake-extension.runForWorkspaceFolders",
+    "onLanguage:python"
   ],
   "bugs": {
     "url": "https://github.com/34j/vscode-autoflake-extension/issues"
