@@ -1,4 +1,4 @@
-# VSCode Autoflake Extension
+# VSCode autoflake Extension
 
 [![GitHub](https://img.shields.io/github/license/34j/vscode-autoflake-extension?logo=github&logoColor=%23181717)](https://github.com/34j/vscode-autoflake-extension)
 [![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/mikoz.autoflake-extension?logo=visual-studio-code&logoColor=%23007ACC)](https://marketplace.visualstudio.com/items?itemName=mikoz.autoflake-extension)

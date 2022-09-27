@@ -1,6 +1,6 @@
 {
   "name": "autoflake-extension",
-  "displayName": "Autoflake Extension",
+  "displayName": "autoflake Extension",
   "description": "Remove unused imports using autoflake",
   "version": "0.0.5",
   "license": "MIT",
@@ -41,7 +41,7 @@
   "contributes": {
     "configuration": [
       {
-        "title": "Autoflake Extension",
+        "title": "autoflake Extension",
         "properties": {
           "autoflake-extension.expand-star-imports": {
             "type": "boolean",
