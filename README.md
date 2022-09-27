@@ -10,8 +10,10 @@ VSCode extension for removing unused imports using [autoflake](https://github.co
 
 ## Features
 
-- Running autoflake for specific file(s) and folder(s)
-- Running autoflake for the workspace
+- Running autoflake for specific file(s) and folder(s).
+- Running autoflake for the workspace.
+- Running autoflake as a formatter.
+- Displaying a prompt for one-click installation if autoflake is not installed.
 
 ![Example GIF](https://raw.githubusercontent.com/34j/vscode-autoflake-extension/main/images/Example.gif)
 
@@ -19,11 +21,14 @@ VSCode extension for removing unused imports using [autoflake](https://github.co
 
 `autoflake>=1.5.2`
 
+It may work with lower versions, but some of the options will not work.
+
+If autoflake is not installed, it can be installed with one click by accepting the prompt from this extension.
+Alternatively, you can install it manually with the following command.
+
 ```shell
 pip install -U autoflake
 ```
-
-It may work with lower versions, but some of the options will not work.
 
 ## Extension Settings
 
