@@ -2,7 +2,7 @@
   "name": "autoflake-extension",
   "displayName": "autoflake Extension",
   "description": "Remove unused imports using autoflake",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "icon": "images/Icon.png",
   "extensionDependencies": [
