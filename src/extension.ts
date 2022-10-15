@@ -1,88 +1,43 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
-import { PythonHiddenTerminal } from "./pythonTerminal/pythonHiddenTerminal";
-import { AutoflakeRunner } from './autoflakeRunner';
-import { PythonVSCodeTerminal } from './pythonTerminal/pythonVSCodeTerminal';
+import * as vscode from "vscode";
+import * as core from "vscode-python-extension-core";
+import { PackageInfo } from "vscode-python-extension-core";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	let useIntegrated = vscode.workspace.getConfiguration('autoflake-extension.extension').get<boolean>('useIntegratedTerminal');
-	let autoflakeRunner = new AutoflakeRunner(useIntegrated ? new PythonVSCodeTerminal() : new PythonHiddenTerminal(undefined));
-	vscode.workspace.onDidChangeConfiguration((e) => {
-		if (e.affectsConfiguration('autoflake-extension.extension')) {
-			useIntegrated =  vscode.workspace.getConfiguration('autoflake-extension.extension').get('useIntegratedTerminal');
-			autoflakeRunner = new AutoflakeRunner(useIntegrated ? new PythonVSCodeTerminal() : new PythonHiddenTerminal(undefined));
-			console.log('autoflake-extension: useIntegratedTerminal changed to ' + useIntegrated);
-		}
-	});
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "autoflake-extension" is now active!');
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand(
-		'autoflake-extension.run',
-		async (uri: vscode.Uri, uris: vscode.Uri[]) => {
-			// The code you place here will be executed every time your command is executed
-
-			// if the command is called from Command Palette, uri and uris are undefined
-			// we use the current file
-
-			// To support calling the command from other scripts, we check both uris and uri.
-			// Uris take precedence over uri.
-			if (uris === undefined) {
-				if (uri === undefined) {
-					const activeTextEditor = vscode.window.activeTextEditor;
-					if (activeTextEditor === undefined) {
-						vscode.window.showErrorMessage('No file to process.');
-						return;
-					} else {
-						uri = activeTextEditor.document.uri;
-					}
-				}
-				uris = [uri];
-			}
-
-			try {
-				autoflakeRunner.runAutoflake(uris);
-			}
-			catch (e) {
-				// print error message
-				vscode.window.showErrorMessage((e as Error).message);
-			}
-		}
-	);
-
-	context.subscriptions.push(disposable);
-
-	// For running autoflake for workspace folders
-	disposable = vscode.commands.registerCommand(
-		'autoflake-extension.runForWorkspaceFolders',
-		async () => {
-			const workspaceFolders = vscode.workspace.workspaceFolders;
-			if (workspaceFolders === undefined) {
-				vscode.window.showErrorMessage('No workspace has been opened.');
-				return;
-			}
-			await vscode.commands.executeCommand('autoflake-extension.run', undefined, workspaceFolders.map(folder => folder.uri));
-		}
-	);
-
-	context.subscriptions.push(disposable);
-
-	// Register as a formatter
-	disposable = vscode.languages.registerDocumentFormattingEditProvider({language: 'python'}, {
-		async provideDocumentFormattingEdits(document: vscode.TextDocument): Promise<vscode.TextEdit[]> {
-			await vscode.commands.executeCommand('autoflake-extension.run', document.uri, undefined);
-			return [];
-		}
-	});
-
-	context.subscriptions.push(disposable);
+  const packageInfo: PackageInfo = {
+    packageName: "autoflake",
+    packageDisplayName: "autoflake",
+    extensionName: "autoflake-extension",
+    runCommandName: "autoflake-extension.run",
+    runForWorkspaceCommandName: "autoflake-extension.runForWorkspace",
+    packageConfigurationSection: "autoflake-extension",
+    useIntegratedTerminalConfigurationSectionFullName:
+      "autoflake-extension.extension.useIntegratedTerminal",
+  };
+  const disp = new core.commandDispatcher.EasyCommandDispatcher(
+    context,
+    packageInfo,
+    new core.packageRunner.EasyOptionsBuilder(
+      packageInfo,
+      [
+        "check",
+        "expand-star-imports",
+        "remove-all-unused-imports",
+        "ignore-init-module-imports",
+        "remove-duplicate-keys",
+        "remove-unused-variables",
+        "remove-rhs-for-unused-variables",
+      ],
+      ["jobs"],
+      ["exclude", "imports"],
+      ["--in-place", "--recursive"]
+    )
+  );
+  disp.activate();
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() { }
+export function deactivate() {}
