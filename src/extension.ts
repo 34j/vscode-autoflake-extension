@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
       ],
       ["jobs"],
       ["exclude", "imports"],
-      ["-i"]
+      ["--in-place", "--recursive"]
     )
   );
   disp.activate();
