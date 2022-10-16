@@ -157,7 +157,7 @@
     "prepare": "husky install",
     "semantic-release": "semantic-release",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js",
+    "test": "echo 'No tests'",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
