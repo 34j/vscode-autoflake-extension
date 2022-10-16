@@ -5,5 +5,4 @@ node_modules
 *.vsix
 *.clip
 *.stg
-Icon.png
 .idea/
