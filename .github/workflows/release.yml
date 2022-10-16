@@ -2,7 +2,7 @@ name: Release
 on:
   workflow_call:
     secrets:
-      NPM_TOKEN:
+      VSCE_PAT:
         required: true
 
 jobs:
