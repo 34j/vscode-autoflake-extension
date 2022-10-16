@@ -1,9 +1,8 @@
 name: Release
 on:
-  workflow_call:
-    secrets:
-      VSCE_PAT:
-        required: true
+  push:
+    branches:
+      - main
 
 jobs:
   release:
