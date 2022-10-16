@@ -152,8 +152,13 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "clean": "rm -rf ./lib/",
+    "cm": "cz",
+    "prepare": "husky install",
+    "semantic-release": "semantic-release",
+    "lint": "eslint ./src/ --fix",
+    "test": "node ./out/test/runTest.js",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
@@ -166,9 +171,38 @@
     "eslint": "^8.20.0",
     "glob": "^8.0.3",
     "mocha": "^10.0.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
+    "semantic-release": "^19.0.2"
   },
   "dependencies": {
     "vscode-python-extension-core": "^1.0.9"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "semantic-release-vsce",
+        {
+          "packageVsix": true
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "path": "*.vsix",
+              "label": "Extension File"
+            }
+          ]
+        }
+      ]
+    ]
   }
 }
