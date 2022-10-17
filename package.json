@@ -178,7 +178,7 @@
   },
   "dependencies": {
     "semantic-release-vsce": "^5.2.0",
-    "vscode-python-extension-core": "^1.0.9"
+    "vscode-python-extension-core": "^1.0.12"
   },
   "release": {
     "branches": [
