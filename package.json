@@ -129,12 +129,14 @@
     "commands": [
       {
         "command": "autoflake-extension.run",
-        "title": "Python: Run autoflake",
-        "enablement": "resourceLangId == python || explorerResourceIsFolder"
+        "title": "Run autoflake",
+        "enablement": "resourceLangId == python || explorerResourceIsFolder",
+        "category": "Python"
       },
       {
         "command": "autoflake-extension.runForWorkspaceFolders",
-        "title": "Python: Run autoflake For The Workspace Folders"
+        "title": "Run autoflake For The Workspace Folders",
+        "category": "Python"
       }
     ],
     "menus": {
