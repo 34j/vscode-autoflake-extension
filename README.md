@@ -3,6 +3,7 @@
 [![GitHub](https://img.shields.io/github/license/34j/vscode-autoflake-extension?logo=github&logoColor=%23181717)](https://github.com/34j/vscode-autoflake-extension)
 [![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/mikoz.autoflake-extension?logo=visual-studio-code&logoColor=%23007ACC)](https://marketplace.visualstudio.com/items?itemName=mikoz.autoflake-extension)
 [![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/mikoz.autoflake-extension)](https://marketplace.visualstudio.com/items?itemName=mikoz.autoflake-extension)
+[![GitHub Repo stars](https://img.shields.io/github/stars/34j/vscode-autoflake-extension?style=social)](https://github.com/34j/vscode-autoflake-extension)
 
 VSCode extension for removing unused imports using [autoflake](https://github.com/PyCQA/autoflake) from the GUI.
 
