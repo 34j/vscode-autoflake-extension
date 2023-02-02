@@ -1,6 +1,6 @@
 {
   "name": "autoflake-extension",
-  "displayName": "autoflake Extension",
+  "displayName": "autoflake",
   "description": "Remove unused imports using autoflake",
   "version": "0.0.7",
   "license": "MIT",
