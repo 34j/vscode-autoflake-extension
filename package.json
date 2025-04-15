@@ -9,7 +9,7 @@
     "ms-python.python"
   ],
   "engines": {
-    "vscode": "^1.70.0"
+    "vscode": "^1.99.0"
   },
   "categories": [
     "Formatters"
