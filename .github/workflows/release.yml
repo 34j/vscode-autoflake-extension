@@ -27,4 +27,4 @@ jobs:
           OVSX_PAT: ${{ secrets.OVSX_PAT }}
         run: npx semantic-release
       - name: Upload Code Coverage
-        uses: codecov/codecov-action@v3.1.0
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
